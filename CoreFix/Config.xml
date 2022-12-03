@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<configuration>
+  <startup>
+  </startup>
+  <appSettings>
+    <add key="Process-Name" value="Slick Racing Game"/>
+    <add key="CPU Threads" value="4"/>
+	<add key="SYSTrayTool" value="True"/>
+	<add key="Start process / Waiting time" value="180"/>
+	<add key="Close process / Waiting time" value="180"/>
+  </appSettings>
+</configuration>
