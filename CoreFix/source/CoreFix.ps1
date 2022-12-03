@@ -155,6 +155,4 @@ $close = {
 }
 	
  #Start	
-for() {
-	&$start
-}
+&$start
