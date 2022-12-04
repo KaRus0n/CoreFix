@@ -54,7 +54,7 @@ if ([long]$configFile.configuration.appsettings.add[1].value -le 63) {
 	$notify.ShowBalloonTip(10000)
 	$notify.Visible = $false
 	 
-	 #
+	 #Convert
 	$ArrList = [System.Collections.ArrayList]@()
 	for ($i = 1; $i -le [long]$configFile.configuration.appsettings.add[1].value; $i++) {$ArrList.Add("1")}
 	$num = $ArrList -join $separator
@@ -95,10 +95,6 @@ if ($configFile.configuration.appsettings.add[2].value -eq "True") {
 $name = $configFile.configuration.appsettings.add[0].value
 $process = Get-Process $name
 
- #We write the initially specified number of threads to the file "logs.txt"
-Write-Output "CPU Threads decimal code:" > .\logs.txt
-$process.ProcessorAffinity >> .\logs.txt
-
  #"Function"(haha) start
 $start = {
 	 #loop
@@ -122,6 +118,10 @@ $start = {
 				$notify.Visible = $true
 				$notify.ShowBalloonTip(10000)
 				$notify.Visible = $false
+				
+				 #exit
+				$stt = (get-process systraytool).id
+				stop-process $stt, $pid
 			}
 			
 			 #Start function "close"
