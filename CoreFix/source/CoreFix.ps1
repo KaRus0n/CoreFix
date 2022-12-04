@@ -93,6 +93,11 @@ if ($configFile.configuration.appsettings.add[2].value -eq "True") {
 	
  #Process name from "Config.xml"
 $name = $configFile.configuration.appsettings.add[0].value
+$process = Get-Process $name
+
+ #We write the initially specified number of threads to the file "logs.txt"
+Write-Output "CPU Threads decimal code:" > .\logs.txt
+$process.ProcessorAffinity >> .\logs.txt
 
  #"Function"(haha) start
 $start = {
@@ -103,12 +108,6 @@ $start = {
 			 #Write down the first PID if the process is detected / PID old - $pido
 			$pido = (Get-Process $name).id
 			timeout /t 10
-			
-			$process = Get-Process $name
-			
-			 #We write the initially specified number of threads to the file "logs.txt"
-			Write-Output "CPU Threads decimal code:" > .\logs.txt
-			$process.ProcessorAffinity >> .\logs.txt
 			
 			 #Apply threads value that is converted to decimal
 			$process.ProcessorAffinity = $num
