@@ -1,0 +1,156 @@
+<Controls:MetroWindow
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"		
+		xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks" 				
+        Title="CoreFix" Name="MainPanel" 
+		Height="290" Width="450" 
+		WindowStartupLocation="CenterScreen"
+		ResizeMode="CanMinimize"
+		WindowStyle="None" 	
+		GlowBrush="{DynamicResource AccentColorBrush}"	
+		Topmost="True" >  
+
+		<Window.Resources>
+			<ResourceDictionary>
+				<ResourceDictionary.MergedDictionaries>
+					<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
+					<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
+					<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Themes/Dark.Red.xaml"/>
+				</ResourceDictionary.MergedDictionaries>
+			</ResourceDictionary>
+		</Window.Resources>	
+		
+	<Grid>
+		<Grid.Background>  
+			<ImageBrush x:Name="Image_Custom" Opacity="0.3"/>
+		</Grid.Background>
+		<StackPanel Margin="10,10,10,10" HorizontalAlignment="Left" VerticalAlignment="Top" Height="500">
+			<TabControl HorizontalAlignment="Left" Height="500"  VerticalAlignment="Top" Width="500" Background="Transparent">
+				<TabItem x:Name="Settings" Header="Settings" Margin="0,-5,0,0">
+					<Grid>
+						<GroupBox Header="off" VerticalAlignment="Top" Margin="225,-67,0,0" Height="60" Width="120">
+							<Label x:Name="activity" FontFamily="Calibri" FontWeight="Bold" FontSize="18" HorizontalAlignment="Left" Margin="0,-5,0,0" VerticalAlignment="Top" Width="200"/>			
+						</GroupBox>
+						<GroupBox Header="Set Value" VerticalAlignment="Top" Margin="-315,0,0,0" Height="195" Width="180">
+							<StackPanel Margin="15,0,0,0">
+								<StackPanel Orientation="Horizontal" Margin="10,0,0,0">
+									<StackPanel Orientation="Vertical" Margin="0,0,0,0">
+										<TextBox x:Name="process_name" 
+											Controls:TextBoxHelper.Watermark="Process Name" 
+											Controls:TextBoxHelper.ClearTextButton="{Binding RelativeSource={RelativeSource Self}, Path=(Controls:TextBoxHelper.HasText), Mode=OneWay}"
+											Height="23" Width="120" Margin="0,5,0,0" 
+											VerticalAlignment="Top" />
+										<ComboBox x:Name="threads_value" 
+												Controls:TextBoxHelper.Watermark="Theads value"
+												Height="23" Width="120" Margin="0,5,0,0"
+												MaxDropDownHeight="120"											
+												VerticalAlignment="Top">
+											<ComboBoxItem Content="0"></ComboBoxItem>
+										</ComboBox>
+										<TextBox x:Name="time_value" 
+											Controls:TextBoxHelper.Watermark="Waiting time(sec)" 
+											Controls:TextBoxHelper.ClearTextButton="{Binding RelativeSource={RelativeSource Self}, Path=(Controls:TextBoxHelper.HasText), Mode=OneWay}"
+											Height="23" Width="120"	Margin="0,5,0,0" 
+											VerticalAlignment="Top" />
+									</StackPanel>
+								</StackPanel>						
+								<StackPanel Orientation="Vertical" Margin="25,20,0,0">
+									<Button x:Name="BTsettingsDone" Content="Save" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Width="90"/>
+								</StackPanel>
+							</StackPanel>
+						</GroupBox>		
+						<GroupBox Header="Your Config.xml" VerticalAlignment="Top" Margin="120,0,0,0" Height="110" Width="230" >
+							<StackPanel Orientation="Horizontal" Margin="-10,-20,0,0">
+								<StackPanel Orientation="Vertical" Margin="10,15,0,0">	
+									<Label Content="Process Name:" FontFamily="Calibri" Foreground="#808080" FontWeight="Bold" FontSize="15" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Width="200"/>
+									<Label Content="Threads value:" FontFamily="Calibri" Foreground="#808080" FontWeight="Bold" FontSize="15" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Width="200"/>
+									<Label Content="Waiting time(sec):" FontFamily="Calibri" Foreground="#808080" FontWeight="Bold" FontSize="15" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Width="200"/>
+								</StackPanel>
+
+								<StackPanel Orientation="Vertical" Margin="-100,17,0,0">
+									<Label x:Name="process_name_txt" Foreground="#A9A9A9" FontSize="12" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Width="200"/>
+									<Label x:Name="threads_value_txt" Foreground="#A9A9A9" FontSize="12" HorizontalAlignment="Left" Margin="0,3,0,0" VerticalAlignment="Top" Width="200"/> 
+									<Label x:Name="time_value_txt" Foreground="#A9A9A9" FontSize="12" HorizontalAlignment="Left" Margin="18,2,0,0" VerticalAlignment="Top" Width="200"/>
+								</StackPanel>
+							</StackPanel>
+						</GroupBox>						
+						<GroupBox Header="Choose Theme" VerticalAlignment="Top" Height="80" Margin="120,115,0,0"  Width="230" >
+							<StackPanel Orientation="Horizontal" Margin="5,10,0,0">	
+								<StackPanel Orientation="Vertical" Margin="0,0,0,0">		
+									<ComboBox x:Name="Choose_Theme" SelectedIndex="0" Text="Choose" Height="25" Width="100" Margin="0,0,0,0">
+										<ComboBoxItem x:Name="Theme_Dark" Content="Dark theme"></ComboBoxItem>
+										<ComboBoxItem x:Name="Theme_Light" Content="Light theme"></ComboBoxItem>
+										<ComboBoxItem x:Name="Theme_Custom" Content="Custom Image"></ComboBoxItem>
+									</ComboBox>  	
+								</StackPanel>	
+								<StackPanel Orientation="Vertical" Margin="10,0,0,0">	
+									<ComboBox x:Name="Choose_Accent" SelectedIndex="0" Text="Choose" Height="25" Width="100" Margin="0,0,0,0">
+									</ComboBox>  	
+								</StackPanel>
+							</StackPanel>
+						</GroupBox>			
+					</Grid>
+				</TabItem>				
+				<TabItem x:Name="About" Header="About" Margin="0,-5,0,0">
+					<Grid>
+						<GroupBox Header="About the program" VerticalAlignment="Top" Margin="120,-40,0,0" Height="235" Width="220" >
+							<StackPanel Orientation="Vertical" Margin="8,0,0,0">
+								<Label  Content="The program was created on" 
+									Foreground="#808080" FontFamily="Calibri" FontWeight="Bold" FontSize="14" HorizontalAlignment="Left" Margin="0,-5,0,0" VerticalAlignment="Top"/>
+								<Label  Content="the basis of the developer's" 
+									Foreground="#808080" FontFamily="Calibri" FontWeight="Bold" FontSize="14" HorizontalAlignment="Left" Margin="0,-5,0,0" VerticalAlignment="Top"/>							
+								<Label  Content="wishes and does not carry a"
+									Foreground="#808080" FontFamily="Calibri" FontWeight="Bold" FontSize="14" HorizontalAlignment="Left" Margin="0,-5,0,0" VerticalAlignment="Top"/>
+								<Label  Content="large semantic load."
+									Foreground="#808080" FontFamily="Calibri" FontWeight="Bold" FontSize="14" HorizontalAlignment="Left" Margin="0,-5,0,0" VerticalAlignment="Top"/>
+								<Label  Content="Use with pleasure if it was" 
+									Foreground="#808080" FontFamily="Calibri" FontWeight="Bold" FontSize="14" HorizontalAlignment="Left" Margin="0,-5,0,0" VerticalAlignment="Top"/>
+								<Label  Content="useful to you and you use it." 
+									Foreground="#808080" FontFamily="Calibri" FontWeight="Bold" FontSize="14" HorizontalAlignment="Left" Margin="0,-5,0,0" VerticalAlignment="Top"/>
+								<Label  Content="_______________________________________________________" 
+									Foreground="#808080" FontFamily="Calibri" FontWeight="Bold" FontSize="14" HorizontalAlignment="Left" Margin="-10,2,0,0" VerticalAlignment="Top"/>
+								<Label  Content="Current version: 2.01" 
+									Foreground="#808080" FontFamily="Calibri" FontWeight="Bold" FontSize="15" HorizontalAlignment="Left" Margin="0,-5,0,0" VerticalAlignment="Top"/>
+								<Label  Content="By: KaRus0n / Кузя Пупкин" 
+									Foreground="#808080" FontFamily="Calibri" FontWeight="Bold" FontSize="15" HorizontalAlignment="Left" Margin="0,-10,0,0" VerticalAlignment="Top"/>										
+							</StackPanel>
+						</GroupBox>				
+						<GroupBox Header="My Contacts" VerticalAlignment="Top" Margin="-315,0,0,0" Height="195" Width="180" >
+							<StackPanel>
+								<Button x:Name="bt_youtube" Content="YouTube" Height="30" Width="130" Margin="0,5,0,0" FontFamily="Calibri" FontWeight="Bold" FontSize="15">
+									<Button.Resources>
+										<Style TargetType="Border">
+											<Setter Property="CornerRadius" Value="5"/>
+										</Style>
+									</Button.Resources>
+								</Button>			
+								<Button x:Name="bt_telegram" Content="Telegram" Height="30" Width="130" Margin="0,10,0,0" FontFamily="Calibri" FontWeight="Bold" FontSize="15">
+									<Button.Resources>
+										<Style TargetType="Border">
+											<Setter Property="CornerRadius" Value="5"/>
+										</Style>
+									</Button.Resources>
+								</Button>			
+								<Button x:Name="bt_vk" Content="VK" Height="30" Width="130" Margin="0,10,0,0" FontFamily="Calibri" FontWeight="Bold" FontSize="15">
+									<Button.Resources>
+										<Style TargetType="Border">
+											<Setter Property="CornerRadius" Value="5"/>
+										</Style>
+									</Button.Resources>
+								</Button>		
+								<Button x:Name="bt_discord" Content="Discord" Height="30" Width="130" Margin="0,10,0,0" FontFamily="Calibri" FontWeight="Bold" FontSize="15">
+									<Button.Resources>
+										<Style TargetType="Border">
+											<Setter Property="CornerRadius" Value="5"/>
+										</Style>
+									</Button.Resources>
+								</Button>
+							</StackPanel>				
+						</GroupBox>						
+					</Grid>
+				</TabItem>
+			</TabControl>
+		</StackPanel>		
+    </Grid>
+</Controls:MetroWindow>

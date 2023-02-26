@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<configuration>
+  <name key="Process Name" value="dsa dsa" />
+  <threads key="CPU Threads" value="4" />
+  <time key="Waiting time(sec)" value="1" />
+  <theme>
+    <BaseColor key="Base Color" value="Custom" />
+    <ColorScheme key="Color Scheme" value="Olive" />
+  </theme>
+</configuration>
