@@ -1,3 +1,12 @@
+$Current_Folder = (get-location).path
+
+regsvr32 /s $Current_Folder\assembly\System.Windows.Forms.dll
+regsvr32 /s $Current_Folder\assembly\MahApps.Metro.dll
+regsvr32 /s $Current_Folder\assembly\MahApps.Metro.IconPacks.dll
+regsvr32 /s $Current_Folder\assembly\Microsoft.Xaml.Behaviors.dll
+regsvr32 /s $Current_Folder\assembly\PresentationFramework.dll
+regsvr32 /s $Current_Folder\assembly\System.Windows.Forms.dll
+
 [System.Reflection.Assembly]::LoadFrom("assembly\System.Windows.Forms.dll")    			| out-null
 [System.Reflection.Assembly]::LoadFrom("assembly\PresentationFramework.dll")    		| out-null  
 [System.Reflection.Assembly]::LoadFrom("assembly\MahApps.Metro.dll")       				| out-null
@@ -11,12 +20,16 @@ function LoadXml ($global:filename) {
     return $XamlLoader 
 }	
 
-$Current_Folder = (get-location).path
 $XamlMainWindow=LoadXml("$Current_Folder\main.xaml")
 $Reader=(New-Object System.Xml.XmlNodeReader $XamlMainWindow)
 $Form=[Windows.Markup.XamlReader]::Load($Reader)
 
-if ((get-process corefix).count -ne 1) { stop-process $pid }
+if ((get-process corefix).count -gt 1) { stop-process $pid }
+
+ ######################### Current version number #################################### 
+ 
+$version = $Form.Findname("version")
+$version.Content = "Current version: 2.03"
 
  ########################### Theme Manager Part 1 #################################### 
  
@@ -192,7 +205,7 @@ $Menu_Exit.add_Click({
  ########################## SetAffinity & Settings #####################################
  
 if (Test-Path $Current_Folder\Config.xml) { 
-	[xml]$configFile = get-content $Current_Folder\Config.xml 
+	[xml]$global:configFile = get-content $Current_Folder\Config.xml 
 } else {
 	$notify.BalloonTipIcon = [System.Windows.Forms.ToolTipIcon]::Error
 	$notify.BalloonTipTitle = "Error!"
@@ -218,7 +231,7 @@ $conversion = {
 		$global:num = "Error 404"	
 		$configFile.configuration.threads.value = "Error 404"
 		$configFile.Save("$Current_Folder\Config.xml")
-		[xml]$configFile = get-content $Current_Folder\Config.xml	
+		[xml]$global:configFile = get-content $Current_Folder\Config.xml	
 		$global:num = $configFile.configuration.threads.value
 	}
 } ; &$conversion | out-null
@@ -305,11 +318,11 @@ $threads_value.Add_DropDownClosed({
 })
 
 $BTsettingsDone.Add_Click({
-	[xml]$configFile = get-content $Current_Folder\Config.xml	
+	[xml]$global:configFile = get-content $Current_Folder\Config.xml	
 	if ($process_name.text -ne "") {
 		$configFile.configuration.name.value = ($process_name.text).trim()
 		$configFile.Save("$Current_Folder\Config.xml")
-		[xml]$configFile = get-content $Current_Folder\Config.xml	
+		[xml]$global:configFile = get-content $Current_Folder\Config.xml	
 		&$nameset
 		$process_name.text = ""
 	}
@@ -321,7 +334,7 @@ $BTsettingsDone.Add_Click({
 				if ([Int32]::TryParse([string]$threads_value.text,[ref]([Int32]$null))){ 
 					$configFile.configuration.threads.value = $threads_value.text
 					$configFile.Save("$Current_Folder\Config.xml")
-					[xml]$configFile = get-content $Current_Folder\Config.xml				
+					[xml]$global:configFile = get-content $Current_Folder\Config.xml				
 					&$conversion
 					$threads_value.text = ""
 				}
@@ -332,7 +345,7 @@ $BTsettingsDone.Add_Click({
 		if ([Int32]::TryParse([string]$time_value.text,[ref]([Int32]$null))){
 			$configFile.configuration.time.value = ($time_value.text).trim()
 			$configFile.Save("$Current_Folder\Config.xml")
-			[xml]$configFile = get-content $Current_Folder\Config.xml		
+			[xml]$global:configFile = get-content $Current_Folder\Config.xml		
 			&$timeset
 			$time_value.text = ""
 		}
@@ -402,7 +415,7 @@ $nep = {
 	$random = ("Light", "Dark", "Custom" | Get-Random)
 	$configFile.configuration.theme.basecolor.value = $random
 	$configFile.Save("$Current_Folder\Config.xml")
-	[xml]$configFile = get-content $Current_Folder\Config.xml 
+	[xml]$global:configFile = get-content $Current_Folder\Config.xml 
 	&$checktheme 
 }
 
