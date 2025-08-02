@@ -1,8 +1,9 @@
 <?xml version="1.0"?>
 <configuration>
-  <name key="Process Name" value="dsad" />
-  <threads key="CPU Threads" value="2" />
-  <time key="Waiting time(sec)" value="200" />
+  <process>
+    <process name="easdsa" threads="48" />
+  </process>
+  <time key="Waiting time(sec)" value="600" />
   <theme>
     <BaseColor key="Base Color" value="Custom" />
     <ColorScheme key="Color Scheme" value="Olive" />
